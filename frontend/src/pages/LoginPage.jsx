@@ -1,4 +1,3 @@
-import React from 'react';
 import { SignIn } from '@clerk/clerk-react';
 
 export default function LoginPage() {
@@ -8,7 +7,7 @@ export default function LoginPage() {
         routing="path" 
         path="/login" 
         signUpUrl="/signup"
-        forceRedirectUrl="/analyze" 
+        forceRedirectUrl="/dashboard" 
       />
     </div>
   );

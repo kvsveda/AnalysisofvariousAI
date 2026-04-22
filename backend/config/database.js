@@ -11,9 +11,9 @@ function getDb() {
     db.exec(`
       CREATE TABLE IF NOT EXISTS users (
         id TEXT PRIMARY KEY,
-        name TEXT NOT NULL,
-        email TEXT UNIQUE NOT NULL,
-        password TEXT NOT NULL,
+        name TEXT,
+        email TEXT UNIQUE,
+        password TEXT,
         createdAt TEXT NOT NULL
       );
 
@@ -27,6 +27,11 @@ function getDb() {
         FOREIGN KEY(userId) REFERENCES users(id)
       );
     `);
+
+    const userColumns = db.prepare('PRAGMA table_info(users)').all().map((col) => col.name);
+    if (!userColumns.includes('updatedAt')) {
+      db.exec('ALTER TABLE users ADD COLUMN updatedAt TEXT');
+    }
   }
   return db;
 }
