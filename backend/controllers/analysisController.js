@@ -286,7 +286,7 @@ exports.runAnalysis = async (req, res) => {
     return res.status(400).json({ error: 'Prompt is too long. Maximum 4000 characters.' });
   }
 
-  console.log(`[Analysis] User: ${req.user.email} | Prompt: "${prompt.slice(0, 60)}..."`);
+  console.log(`[Analysis] User: ${req.user?.email || req.user?.id || req.userId} | Prompt: "${prompt.slice(0, 60)}..."`);
 
   // ── Step 1: Run 3 models simultaneously ──────────────────
   const [gptResult, geminiResult, claudeResult] = await Promise.all([
